@@ -47,41 +47,6 @@ git pull
 使用 $thesis-revision 润色中英文摘要并检查一致性。
 ```
 
-## 辅助脚本
-
-本 skill 包含启发式扫描脚本。它们只作为辅助工具，不能替代人工审查。
-
-```bash
-python3 scripts/scan_latex_thesis.py /path/to/thesis --pdf /path/to/thesis.pdf
-python3 scripts/check_bibliography.py /path/to/references.bib
-python3 scripts/extract_thesis_prose.py /path/to/thesis > prose.md
-python3 scripts/generate_style_sheet.py /path/to/thesis > STYLE_SHEET.md
-python3 scripts/generate_examiner_response.py comments.txt --out revision-response.md
-```
-
-## 仓库结构
-
-```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── bibliography-checklist.md
-│   ├── consistency-checklist.md
-│   ├── examiner-response.md
-│   ├── grammar-checklist.md
-│   ├── latex-pdf-checklist.md
-│   ├── revision-workflow.md
-│   └── style-sheet.md
-└── scripts/
-    ├── check_bibliography.py
-    ├── extract_thesis_prose.py
-    ├── generate_examiner_response.py
-    ├── generate_style_sheet.py
-    └── scan_latex_thesis.py
-```
-
 ## 设计原则
 
 - 通用：不假设固定模板、目录结构、学科方向或术语体系。

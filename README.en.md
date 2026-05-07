@@ -47,41 +47,6 @@ Use $thesis-revision to check bibliography duplicates and BibTeX capitalization.
 Use $thesis-revision to polish the Chinese and English abstracts and check consistency.
 ```
 
-## Helper Scripts
-
-The skill includes heuristic scripts. They are helpers, not substitutes for manual review.
-
-```bash
-python3 scripts/scan_latex_thesis.py /path/to/thesis --pdf /path/to/thesis.pdf
-python3 scripts/check_bibliography.py /path/to/references.bib
-python3 scripts/extract_thesis_prose.py /path/to/thesis > prose.md
-python3 scripts/generate_style_sheet.py /path/to/thesis > STYLE_SHEET.md
-python3 scripts/generate_examiner_response.py comments.txt --out revision-response.md
-```
-
-## Repository Layout
-
-```text
-.
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── bibliography-checklist.md
-│   ├── consistency-checklist.md
-│   ├── examiner-response.md
-│   ├── grammar-checklist.md
-│   ├── latex-pdf-checklist.md
-│   ├── revision-workflow.md
-│   └── style-sheet.md
-└── scripts/
-    ├── check_bibliography.py
-    ├── extract_thesis_prose.py
-    ├── generate_examiner_response.py
-    ├── generate_style_sheet.py
-    └── scan_latex_thesis.py
-```
-
 ## Design Principles
 
 - Be general: do not assume a specific thesis template, folder structure, discipline, or terminology set.
