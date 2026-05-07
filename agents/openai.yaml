@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thesis Revision"
+  short_description: "Revise LaTeX theses for review-ready consistency"
+  default_prompt: "Use $thesis-revision to review and minimally revise this LaTeX thesis before submission."
