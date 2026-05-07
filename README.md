@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-`thesis-revision` is a Codex skill for review-ready revision of LaTeX theses and dissertations. It focuses on non-logical issues: examiner comments, thesis-wide grammar and consistency, bibliography quality, abstract polishing, LaTeX cross-references, build logs, and PDF presentation.
+`thesis-revision` is an agent skill for review-ready revision of LaTeX theses and dissertations. It focuses on non-logical issues: examiner comments, thesis-wide grammar and consistency, bibliography quality, abstract polishing, LaTeX cross-references, build logs, and PDF presentation.
 
 ## Features
 
@@ -16,7 +16,7 @@
 
 ## Installation
 
-Install or copy this repository as a Codex skill:
+Install or copy this repository as an agent skill:
 
 ```bash
 mkdir -p ~/.codex/skills

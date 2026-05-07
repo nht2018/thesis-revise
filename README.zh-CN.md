@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-`thesis-revision` 是一个面向 LaTeX 学位论文的 Codex skill，用于答辩、送审、提交前的非逻辑性修改与复查。它重点处理专家意见、全文语法与一致性、参考文献规范、摘要润色、LaTeX 交叉引用、编译日志和 PDF 呈现问题。
+`thesis-revision` 是一个面向 LaTeX 学位论文的 agent skill，用于答辩、送审、提交前的非逻辑性修改与复查。它重点处理专家意见、全文语法与一致性、参考文献规范、摘要润色、LaTeX 交叉引用、编译日志和 PDF 呈现问题。
 
 ## 功能
 
@@ -16,7 +16,7 @@
 
 ## 安装
 
-将本仓库安装或复制到 Codex skills 目录：
+将本仓库安装或复制到 agent skills 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
