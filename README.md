@@ -27,6 +27,12 @@ git clone https://github.com/nht2018/thesis-revise.git
 
 然后根据你使用的 agent，将该仓库作为自定义 skill 启用。它适用于支持自定义技能/规则/项目指令的主流 coding agent，例如 Codex、Claude Code、Cursor CLI 等。
 
+事实上，通常只需要在 agent 中输入：
+
+```text
+Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
+```
+
 ## 使用
 
 示例提示词：

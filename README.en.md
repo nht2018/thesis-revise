@@ -27,6 +27,12 @@ git clone https://github.com/nht2018/thesis-revise.git
 
 Then enable the repository as a custom skill according to the agent you use. It is intended for mainstream coding agents that support custom skills, rules, or project instructions, such as Codex, Claude Code, and Cursor CLI.
 
+In practice, you can usually ask your agent:
+
+```text
+Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
+```
+
 ## Usage
 
 Example prompts:
