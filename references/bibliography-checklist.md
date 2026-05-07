@@ -11,6 +11,22 @@ Use this guide when editing `.bib` files, reference lists, publication lists, or
   - the user explicitly wants the preprint.
 - Preserve existing citation keys when possible. If keys are merged, update all citations and verify no undefined citations remain.
 
+## Formal Publication Verification
+
+Use web verification when the user asks to prefer official publications, DOI accuracy, or current reference metadata. Prefer primary or authoritative sources:
+
+- Publisher pages and DOI landing pages.
+- Crossref or MathSciNet/zbMATH-style metadata when available.
+- arXiv pages only to confirm preprint status or published-version links.
+- Conference proceedings pages for conference papers.
+
+Verification rules:
+
+- Do not replace a preprint with a formal version based only on a similar title; confirm authors and venue.
+- If the formal version has a materially different title or content, report the difference before merging.
+- Preserve the cited version when the thesis cites a result available only in that version.
+- Include source links in the user-facing report when web verification was used.
+
 ## Capitalization Protection
 
 BibTeX styles may downcase title words. Protect words that must retain capitalization with braces:

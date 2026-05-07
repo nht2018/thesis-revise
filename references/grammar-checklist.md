@@ -9,6 +9,22 @@ Use this guide for full-thesis grammar and prose checks. Keep it separate from l
 - If available, use tools such as `detex`, `pdftotext`, or LanguageTool only as aids. Treat their output as noisy in math-heavy text.
 - Review chapter by chapter; do not apply global replacements without checking local context.
 
+## Enhanced Full-Thesis Pass
+
+Use an enhanced pass when the user asks for "全文语法检查" or a submission-ready language pass:
+
+1. Extract prose by included TeX file rather than scanning every archived file.
+2. Split prose into manageable paragraphs or section-level chunks.
+3. Run a tool-assisted check when available, but verify every suggestion in the source.
+4. Report findings by chapter with severity and exact source location when possible.
+5. Apply only low-risk grammar fixes automatically after approval; keep claim-level rephrasing as suggestions.
+
+Optional helper:
+
+```bash
+python3 ~/.codex/skills/thesis-revision/scripts/extract_thesis_prose.py /path/to/thesis > prose.md
+```
+
 ## Must-Fix Grammar
 
 Flag and correct:

@@ -1,6 +1,6 @@
 ---
 name: thesis-revision
-description: Review and minimally revise LaTeX theses or dissertations for non-technical-logical issues before submission, defense, or expert re-review. Use when the user asks to handle examiner comments, run thesis-wide grammar/prose checks, polish abstracts, check bilingual consistency, normalize terminology/notation/style across stitched-together chapters, inspect BibTeX/reference quality, diagnose LaTeX/PDF compilation or cross-reference problems, or produce a review-first thesis revision plan.
+description: Review and minimally revise LaTeX theses or dissertations for non-technical-logical issues before submission, defense, or expert re-review. Use when the user asks to handle examiner comments, draft official Chinese revision/advisor-response materials, run thesis-wide grammar/prose checks, generate a project style sheet, polish abstracts, check bilingual consistency, normalize terminology/notation/style across stitched-together chapters, inspect BibTeX/reference quality, verify formal publication versions, diagnose LaTeX/PDF compilation or cross-reference problems, or produce a review-first thesis revision plan.
 ---
 
 # Thesis Revision
@@ -23,10 +23,12 @@ Do not assume a fixed template, folder layout, discipline, old-version directory
 2. Build a thesis style profile.
    - Extract chapter/section headings, abstract and keywords, notation sections, theorem/algorithm environments, cross-reference style, bibliography style, and recurring technical terms.
    - Derive preferred terminology and title style from the project; do not impose a discipline-specific vocabulary unless the user gives one.
+   - When the user asks for consistency work, create or update a project style sheet and use it as the local source of truth.
    - If chapters are adapted from papers, look for duplicated introductions, inconsistent contribution wording, repeated definitions, notation collisions, and mixed style conventions.
 
 3. Review before editing.
    - For examiner comments, produce a tracking table with: comment, location, proposed minimal fix, risk level, and verification method.
+   - When requested, draft a Chinese "revision or non-revision explanation for examiner comments" and a separate "advisor opinion" draft for official thesis materials. Mark advisor text as a draft that must be confirmed and signed by the advisor.
    - For thesis-wide grammar checks, inspect prose by chapter or section after filtering out LaTeX commands, formulas, citations, and bibliography noise.
    - Classify findings as "must fix", "should fix", or "leave/confirm".
    - Give concrete file/line references and distinguish real PDF issues from text-extraction artifacts.
@@ -48,7 +50,9 @@ Do not assume a fixed template, folder layout, discipline, old-version directory
 Load only the reference file needed for the current task:
 
 - `references/revision-workflow.md`: examiner-comment handling, risk classes, and review-first output format.
+- `references/examiner-response.md`: Chinese official revision-explanation and advisor-opinion templates.
 - `references/grammar-checklist.md`: thesis-wide grammar, academic prose, and LaTeX-aware language-review workflow.
+- `references/style-sheet.md`: project-level style sheet generation for terms, notation, headings, citations, and bilingual wording.
 - `references/consistency-checklist.md`: thesis-wide consistency across stitched chapters, abstracts, terms, notation, headings, and prose style.
 - `references/bibliography-checklist.md`: BibTeX duplicate detection, formal-version preference, capitalization protection, and reference-field normalization.
 - `references/latex-pdf-checklist.md`: LaTeX build, cross-reference, algorithm, TOC, PDF, and log checks.
@@ -60,6 +64,9 @@ Use scripts as helpers, not as substitutes for reading the source:
 ```bash
 python3 ~/.codex/skills/thesis-revision/scripts/scan_latex_thesis.py /path/to/thesis
 python3 ~/.codex/skills/thesis-revision/scripts/check_bibliography.py /path/to/references.bib
+python3 ~/.codex/skills/thesis-revision/scripts/extract_thesis_prose.py /path/to/thesis
+python3 ~/.codex/skills/thesis-revision/scripts/generate_style_sheet.py /path/to/thesis
+python3 ~/.codex/skills/thesis-revision/scripts/generate_examiner_response.py comments.txt --out revision-response.md
 ```
 
 The scripts emit Markdown reports with heuristic findings. Confirm each high-impact finding against the source or PDF before editing.
