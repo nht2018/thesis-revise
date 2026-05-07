@@ -1,55 +1,55 @@
-# Thesis Revision Skill
+# 毕业论文修改 Skill
 
-[English](README.md) | [中文](README.zh-CN.md)
+[中文](README.md) | [English](README.en.md)
 
-`thesis-revision` is an agent skill for review-ready revision of LaTeX theses and dissertations. It focuses on non-logical issues: examiner comments, thesis-wide grammar and consistency, bibliography quality, abstract polishing, LaTeX cross-references, build logs, and PDF presentation.
+`thesis-revision` 是一个面向 LaTeX 学位论文的 agent skill，用于答辩、送审、提交前的非逻辑性修改与复查。它重点处理专家意见、全文语法与一致性、参考文献规范、摘要润色、LaTeX 交叉引用、编译日志和 PDF 呈现问题。
 
-## Features
+## 功能
 
-- Review examiner comments and produce a traceable minimal revision plan.
-- Draft Chinese official materials for examiner-comment revision explanations and advisor opinions.
-- Run thesis-wide grammar and academic prose checks while avoiding LaTeX, math, and citation noise.
-- Generate a project-level style sheet for terminology, notation, headings, citations, and bilingual wording.
-- Check structure, terminology, notation, heading style, citations, and prose consistency across chapters assembled from multiple papers.
-- Inspect BibTeX entries for duplicates, capitalization protection, official publication versions, venue formatting, URLs, editions, and malformed fields.
-- Support optional formal-publication verification for references when online checking is requested.
-- Polish bilingual abstracts and check consistency between Chinese and English abstracts and keywords.
-- Diagnose LaTeX/PDF issues such as undefined references, repeated auto-reference words, algorithm line-number references, TOC page numbers, and bibliography formatting.
-- Default to a review-first workflow: report and plan before editing, unless the user explicitly asks for direct edits.
+- 根据专家意见生成可追踪的最小修改计划。
+- 起草中文教务材料，包括“针对专家意见的修改（或不修改）说明”和“导师意见”。
+- 进行全文语法和学术表达检查，同时避开 LaTeX、公式和引用噪音。
+- 生成项目级 style sheet，用于统一术语、记号、标题、引用和中英文表达。
+- 检查由多篇小论文拼接成的学位论文在结构、术语、记号、标题风格、引用和语言风格上的一致性。
+- 检查 BibTeX 中的重复文献、大小写保护、正式发表版本优先、期刊/会议名格式、URL、edition 和字段异常。
+- 在用户要求联网核验时，辅助检查文献是否存在正式发表版本。
+- 润色中英文摘要，并检查摘要与关键词的中英文一致性。
+- 诊断 LaTeX/PDF 问题，例如未定义引用、重复自动引用词、算法行号误引、目录页码和参考文献格式。
+- 默认采用“先报告再修改”的流程；只有用户明确要求时才直接修改。
 
-## Installation
+## 安装
 
-Install or copy this repository as an agent skill:
+将本仓库安装或复制到 agent skills 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
 git clone https://github.com/nht2018/thesis-revise.git ~/.codex/skills/thesis-revision
 ```
 
-If a local copy already exists:
+如果本地已安装：
 
 ```bash
 cd ~/.codex/skills/thesis-revision
 git pull
 ```
 
-## Usage
+## 使用
 
-Example prompts:
+示例提示词：
 
 ```text
-Use $thesis-revision to review this LaTeX thesis before submission.
-Use $thesis-revision to handle these examiner comments and propose minimal edits.
-Use $thesis-revision to draft the Chinese revision explanation and advisor opinion for these examiner comments.
-Use $thesis-revision to run a full grammar and prose check on this thesis.
-Use $thesis-revision to generate a project style sheet before consistency edits.
-Use $thesis-revision to check bibliography duplicates and BibTeX capitalization.
-Use $thesis-revision to polish the Chinese and English abstracts and check consistency.
+使用 $thesis-revision 检查这篇 LaTeX 毕业论文的非逻辑性问题。
+使用 $thesis-revision 根据专家意见给出最小修改计划。
+使用 $thesis-revision 根据专家意见起草中文修改说明和导师意见。
+使用 $thesis-revision 对全文做语法和学术表达检查。
+使用 $thesis-revision 在做一致性修改前生成项目 style sheet。
+使用 $thesis-revision 检查参考文献重复和 BibTeX 大小写保护。
+使用 $thesis-revision 润色中英文摘要并检查一致性。
 ```
 
-## Helper Scripts
+## 辅助脚本
 
-The skill includes heuristic scripts. They are helpers, not substitutes for manual review.
+本 skill 包含启发式扫描脚本。它们只作为辅助工具，不能替代人工审查。
 
 ```bash
 python3 scripts/scan_latex_thesis.py /path/to/thesis --pdf /path/to/thesis.pdf
@@ -59,7 +59,7 @@ python3 scripts/generate_style_sheet.py /path/to/thesis > STYLE_SHEET.md
 python3 scripts/generate_examiner_response.py comments.txt --out revision-response.md
 ```
 
-## Repository Layout
+## 仓库结构
 
 ```text
 .
@@ -82,10 +82,10 @@ python3 scripts/generate_examiner_response.py comments.txt --out revision-respon
     └── scan_latex_thesis.py
 ```
 
-## Design Principles
+## 设计原则
 
-- Be general: do not assume a specific thesis template, folder structure, discipline, or terminology set.
-- Be conservative: preserve technical claims, theorems, algorithms, experiments, and conclusions.
-- Be traceable: connect every expert comment to a location, action, and verification step.
-- Be minimal: prefer local sentence-level edits and style normalization over broad rewrites.
-- Be verifiable: compile the thesis and inspect logs/PDF output after edits.
+- 通用：不假设固定模板、目录结构、学科方向或术语体系。
+- 保守：不改变技术结论、定理、算法、实验和核心论断。
+- 可追踪：每条专家意见都对应位置、处理方式和验证方法。
+- 最小：优先做句子级修改和风格统一，不做大段重写。
+- 可验证：修改后编译论文，并检查日志与 PDF 输出。

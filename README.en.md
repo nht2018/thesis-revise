@@ -1,0 +1,91 @@
+# Thesis Revision Skill
+
+[中文](README.md) | [English](README.en.md)
+
+`thesis-revision` is an agent skill for review-ready revision of LaTeX theses and dissertations. It focuses on non-logical issues: examiner comments, thesis-wide grammar and consistency, bibliography quality, abstract polishing, LaTeX cross-references, build logs, and PDF presentation.
+
+## Features
+
+- Review examiner comments and produce a traceable minimal revision plan.
+- Draft Chinese official materials for examiner-comment revision explanations and advisor opinions.
+- Run thesis-wide grammar and academic prose checks while avoiding LaTeX, math, and citation noise.
+- Generate a project-level style sheet for terminology, notation, headings, citations, and bilingual wording.
+- Check structure, terminology, notation, heading style, citations, and prose consistency across chapters assembled from multiple papers.
+- Inspect BibTeX entries for duplicates, capitalization protection, official publication versions, venue formatting, URLs, editions, and malformed fields.
+- Support optional formal-publication verification for references when online checking is requested.
+- Polish bilingual abstracts and check consistency between Chinese and English abstracts and keywords.
+- Diagnose LaTeX/PDF issues such as undefined references, repeated auto-reference words, algorithm line-number references, TOC page numbers, and bibliography formatting.
+- Default to a review-first workflow: report and plan before editing, unless the user explicitly asks for direct edits.
+
+## Installation
+
+Install or copy this repository as an agent skill:
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/nht2018/thesis-revise.git ~/.codex/skills/thesis-revision
+```
+
+If a local copy already exists:
+
+```bash
+cd ~/.codex/skills/thesis-revision
+git pull
+```
+
+## Usage
+
+Example prompts:
+
+```text
+Use $thesis-revision to review this LaTeX thesis before submission.
+Use $thesis-revision to handle these examiner comments and propose minimal edits.
+Use $thesis-revision to draft the Chinese revision explanation and advisor opinion for these examiner comments.
+Use $thesis-revision to run a full grammar and prose check on this thesis.
+Use $thesis-revision to generate a project style sheet before consistency edits.
+Use $thesis-revision to check bibliography duplicates and BibTeX capitalization.
+Use $thesis-revision to polish the Chinese and English abstracts and check consistency.
+```
+
+## Helper Scripts
+
+The skill includes heuristic scripts. They are helpers, not substitutes for manual review.
+
+```bash
+python3 scripts/scan_latex_thesis.py /path/to/thesis --pdf /path/to/thesis.pdf
+python3 scripts/check_bibliography.py /path/to/references.bib
+python3 scripts/extract_thesis_prose.py /path/to/thesis > prose.md
+python3 scripts/generate_style_sheet.py /path/to/thesis > STYLE_SHEET.md
+python3 scripts/generate_examiner_response.py comments.txt --out revision-response.md
+```
+
+## Repository Layout
+
+```text
+.
+├── SKILL.md
+├── agents/
+│   └── openai.yaml
+├── references/
+│   ├── bibliography-checklist.md
+│   ├── consistency-checklist.md
+│   ├── examiner-response.md
+│   ├── grammar-checklist.md
+│   ├── latex-pdf-checklist.md
+│   ├── revision-workflow.md
+│   └── style-sheet.md
+└── scripts/
+    ├── check_bibliography.py
+    ├── extract_thesis_prose.py
+    ├── generate_examiner_response.py
+    ├── generate_style_sheet.py
+    └── scan_latex_thesis.py
+```
+
+## Design Principles
+
+- Be general: do not assume a specific thesis template, folder structure, discipline, or terminology set.
+- Be conservative: preserve technical claims, theorems, algorithms, experiments, and conclusions.
+- Be traceable: connect every expert comment to a location, action, and verification step.
+- Be minimal: prefer local sentence-level edits and style normalization over broad rewrites.
+- Be verifiable: compile the thesis and inspect logs/PDF output after edits.
