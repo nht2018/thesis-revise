@@ -19,17 +19,18 @@
 
 ## 安装
 
-将本仓库安装或复制到 agent skills 目录：
+将本仓库克隆到本地：
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/nht2018/thesis-revise.git ~/.codex/skills/thesis-revision
+git clone https://github.com/nht2018/thesis-revise.git
 ```
 
-如果本地已安装：
+然后根据你使用的 agent，将该仓库作为自定义 skill、rules、instructions 或上下文资源启用。它适用于支持自定义技能/规则/项目指令的主流 coding agent，例如 Codex、Claude Code、Cursor CLI 等。
+
+如果本地已有副本：
 
 ```bash
-cd ~/.codex/skills/thesis-revision
+cd thesis-revise
 git pull
 ```
 

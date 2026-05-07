@@ -19,17 +19,18 @@
 
 ## Installation
 
-Install or copy this repository as an agent skill:
+Clone this repository locally:
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/nht2018/thesis-revise.git ~/.codex/skills/thesis-revision
+git clone https://github.com/nht2018/thesis-revise.git
 ```
+
+Then enable the repository as a custom skill, rules directory, instructions source, or context resource according to the agent you use. It is intended for mainstream coding agents that support custom skills, rules, or project instructions, such as Codex, Claude Code, and Cursor CLI.
 
 If a local copy already exists:
 
 ```bash
-cd ~/.codex/skills/thesis-revision
+cd thesis-revise
 git pull
 ```
 
