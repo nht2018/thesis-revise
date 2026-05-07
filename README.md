@@ -25,14 +25,7 @@
 git clone https://github.com/nht2018/thesis-revise.git
 ```
 
-然后根据你使用的 agent，将该仓库作为自定义 skill、rules、instructions 或上下文资源启用。它适用于支持自定义技能/规则/项目指令的主流 coding agent，例如 Codex、Claude Code、Cursor CLI 等。
-
-如果本地已有副本：
-
-```bash
-cd thesis-revise
-git pull
-```
+然后根据你使用的 agent，将该仓库作为自定义 skill 启用。它适用于支持自定义技能/规则/项目指令的主流 coding agent，例如 Codex、Claude Code、Cursor CLI 等。
 
 ## 使用
 
