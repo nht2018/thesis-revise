@@ -20,14 +20,15 @@
 
 ## Installation
 
-In most cases, ask your agent:
+You need a mainstream coding agent that supports custom skills, rules, or project instructions, such as [Codex](https://chatgpt.com/codex/), [Claude Code](https://code.claude.com/docs/en/quickstart), or [Cursor CLI](https://cursor.com/).
+thesis-revise depends on revision-check. In most cases, ask your agent:
 
 ```text
 Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
 Install the skill from https://github.com/nht2018/revision-check.git as revision-check.
 ```
 
-Mainstream coding agents that support custom skills, rules, or project instructions will typically fetch and enable these skills through their own mechanism, such as Codex, Claude Code, and Cursor CLI.
+The agent will usually fetch and enable these skills through its own mechanism.
 
 ## Usage
 

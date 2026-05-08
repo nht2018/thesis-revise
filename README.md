@@ -20,14 +20,14 @@
 
 ## 安装
 
-通常只需要在 agent 中输入：
+你需要一个支持自定义技能/规则/项目指令的主流 coding agent，例如 [Codex](https://chatgpt.com/codex/)、[Claude Code](https://code.claude.com/docs/en/quickstart)、[Cursor CLI](https://cursor.com/) 等。
+thesis-revise 依赖于 [revision-check](https://github.com/nht2018/revision-check)。只需要在 agent 中输入：
 
 ```text
 Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
 Install the skill from https://github.com/nht2018/revision-check.git as revision-check.
 ```
-
-支持自定义技能/规则/项目指令的主流 coding agent 通常会根据自身机制拉取并启用这些 skills，例如 Codex、Claude Code、Cursor CLI 等。
+agent 通常会根据自身机制拉取并启用这些 skills。
 
 ## 使用
 
@@ -42,6 +42,8 @@ Install the skill from https://github.com/nht2018/revision-check.git as revision
 使用 $thesis-revision 检查参考文献重复和 BibTeX 大小写保护。
 使用 $thesis-revision 润色中英文摘要并检查一致性。
 ```
+然后浏览器中会自动弹出审批页面，你可以进行审批。
+![Revision Review demo](assets/demo.jpg)
 
 ## 设计原则
 

@@ -63,23 +63,14 @@ Maintain an internal table before drafting official text:
 
 ## Official Document 1: 针对专家意见的修改（或不修改）说明
 
-Use this structure for a Chinese official draft:
+Use paragraph prose for this Chinese official draft. Do not use a table, and do not add metadata lines such as `论文题目` or `答辩人`.
 
 ```markdown
 # 针对专家意见的修改（或不修改）说明
 
 本人已认真阅读专家对学位论文提出的评阅意见，并在导师指导下对论文进行了逐条核对和修改。现将针对专家意见的修改（或不修改）情况说明如下。
 
-| 序号 | 专家意见 | 修改（或不修改）说明 | 修改位置 |
-| --- | --- | --- | --- |
-| 1 | ... | 已采纳。论文已在……处补充/修改……，以……。 | 第 X 章第 X 节，第 X 页 |
-| 2 | ... | 经认真核对，暂未按该意见修改，主要原因是……。该处理已与导师沟通确认。 | 不适用/第 X 章第 X 节 |
-
-以上说明均基于论文当前修改稿。本人确认已对专家意见进行了认真核对，并已根据论文实际情况作出相应修改或说明。
-
-答辩人签名：
-
-日期：
+论文已在第 X 章第 X 节（第 X 页）补充/修改……，进一步明确……。对于……，经认真核对，暂未修改，主要原因是……。该处理不影响论文的主要结论，并已与导师沟通确认。
 ```
 
 Recommended wording:
@@ -94,7 +85,7 @@ Recommended wording:
 
 ## Official Document 2: 导师意见
 
-Draft advisor text only as a draft for advisor confirmation and signature. The text must explicitly state whether the advisor agrees with the student's revision/non-revision explanation and whether the advisor agrees to the defense.
+Draft advisor text only as a draft for advisor confirmation. The text must explicitly state whether the advisor agrees with the student's revision/non-revision explanation and whether the advisor agrees to the defense.
 
 ### Agree to Defense
 
@@ -104,10 +95,6 @@ Draft advisor text only as a draft for advisor confirmation and signature. The t
 本人已审阅答辩人针对专家评阅意见所作的修改（或不修改）说明及论文修改稿。答辩人能够认真对待专家提出的意见，对论文中涉及的文字表述、结构安排、术语记号、参考文献和相关说明等问题进行了逐条核对和相应修改；对于个别未作修改或仅作部分修改的意见，答辩人已结合论文研究内容和实际情况作出说明，理由基本充分。
 
 本人认为，答辩人对专家意见的修改（或不修改）说明较为完整，相关修改能够回应专家意见，论文修改稿已达到申请答辩的要求。本人同意答辩人作出的修改或不修改说明，同意其参加学位论文答辩。
-
-导师签名：
-
-日期：
 ```
 
 ### Conditional Agreement
@@ -118,10 +105,6 @@ Draft advisor text only as a draft for advisor confirmation and signature. The t
 本人已审阅答辩人针对专家评阅意见所作的修改（或不修改）说明及论文修改稿。答辩人已对专家意见进行了认真核对，并对论文中的主要问题作出了相应修改；对于暂未修改或部分修改的内容，答辩人已说明原因。本人原则同意其对专家意见作出的修改或不修改说明。
 
 答辩人仍需在答辩前进一步核对论文格式、参考文献和文字细节。完成上述完善后，本人同意其参加学位论文答辩。
-
-导师签名：
-
-日期：
 ```
 
 ### Do Not Agree Yet
@@ -130,10 +113,6 @@ Draft advisor text only as a draft for advisor confirmation and signature. The t
 # 导师意见（草稿，供导师确认）
 
 本人已审阅答辩人针对专家评阅意见所作的修改（或不修改）说明及论文修改稿。目前部分专家意见尚未得到充分回应，相关修改说明仍需进一步补充和完善。本人暂不同意答辩人当前版本的修改或不修改说明，暂不同意其以该版本参加学位论文答辩。
-
-导师签名：
-
-日期：
 ```
 
 ## Quality Rules
