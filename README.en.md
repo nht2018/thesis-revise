@@ -44,6 +44,9 @@ Use $thesis-revision to check bibliography duplicates and BibTeX capitalization.
 Use $thesis-revision to polish the Chinese and English abstracts and check consistency.
 ```
 
+The approval page will open automatically in the browser, where you can review and approve proposed changes.
+![Revision Review demo](assets/demo.jpg)
+
 ## Design Principles
 
 - Be general: do not assume a specific thesis template, folder structure, discipline, or terminology set.
