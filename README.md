@@ -7,6 +7,7 @@
 ## 功能
 
 - 根据专家意见生成可追踪的最小修改计划。
+- 调用 `revision-check` 作为审批 skill，在用户批准后才应用非平凡修改。
 - 起草中文教务材料，包括“针对专家意见的修改（或不修改）说明”和“导师意见”。
 - 进行全文语法和学术表达检查，同时避开 LaTeX、公式和引用噪音。
 - 生成项目级 style sheet，用于统一术语、记号、标题、引用和中英文表达。
@@ -23,9 +24,10 @@
 
 ```text
 Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
+Install the skill from https://github.com/nht2018/revision-check.git as revision-check.
 ```
 
-支持自定义技能/规则/项目指令的主流 coding agent 通常会根据自身机制拉取并启用该 skill，例如 Codex、Claude Code、Cursor CLI 等。
+支持自定义技能/规则/项目指令的主流 coding agent 通常会根据自身机制拉取并启用这些 skills，例如 Codex、Claude Code、Cursor CLI 等。
 
 ## 使用
 

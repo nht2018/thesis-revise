@@ -1,6 +1,6 @@
 ---
 name: thesis-revision
-description: Review and minimally revise LaTeX theses or dissertations for non-technical-logical issues before submission, defense, or expert re-review. Use when the user asks to handle examiner comments, draft official Chinese revision/advisor-response materials, run thesis-wide grammar/prose checks, generate a project style sheet, polish abstracts, check bilingual consistency, normalize terminology/notation/style across stitched-together chapters, inspect BibTeX/reference quality, verify formal publication versions, diagnose LaTeX/PDF compilation or cross-reference problems, or produce a review-first thesis revision plan.
+description: Review and minimally revise LaTeX theses or dissertations for non-technical-logical issues before submission, defense, or expert re-review. Use when the user asks to handle examiner comments, draft official Chinese revision/advisor-response materials, run thesis-wide grammar/prose checks, generate a project style sheet, polish abstracts, check bilingual consistency, normalize terminology/notation/style across stitched-together chapters, inspect BibTeX/reference quality, verify formal publication versions, diagnose LaTeX/PDF compilation or cross-reference problems, produce a review-first thesis revision plan, or coordinate approved thesis edits through the companion revision-check approval skill.
 ---
 
 # Thesis Revision
@@ -12,6 +12,8 @@ Use this skill to run a review-first workflow for LaTeX thesis revision. Focus o
 Default to "report and plan first, edit after confirmation" unless the user explicitly requests direct edits. Preserve the thesis's technical claims, theorem statements, algorithms, experiments, and conclusions except for small language or reference corrections needed by the user.
 
 Do not assume a fixed template, folder layout, discipline, old-version directory, terminology set, or citation package. Infer the thesis structure and style from the current project.
+
+Use `revision-check` as the approval skill when edits need user approval. `thesis-revision` owns thesis-specific diagnosis and edit planning; `revision-check` owns approval-page generation, approval JSON handling, ignored-item suppression, and applying only approved edits. If `revision-check` is not installed and the user wants click-based approval, ask the user to install it from `https://github.com/nht2018/revision-check.git` as `revision-check`.
 
 ## Workflow
 
@@ -33,13 +35,19 @@ Do not assume a fixed template, folder layout, discipline, old-version directory
    - Classify findings as "must fix", "should fix", or "leave/confirm".
    - Give concrete file/line references and distinguish real PDF issues from text-extraction artifacts.
 
-4. Implement only after approval.
+4. Route approval through `revision-check` when approval is required.
+   - For any nontrivial source edits after a review plan, use the installed `$revision-check` workflow unless the user explicitly asks for direct edits without an approval page.
+   - Convert thesis findings into `revision-check` review items with concrete locations, occurrence counts, issue types, current/proposed text, reasons, and priorities.
+   - Let `revision-check` open the local `Revision Review` approval page and apply only the approved items.
+   - Do not duplicate or bypass `revision-check` approval logic inside this skill.
+
+5. Implement only after approval.
    - Make the smallest edits that satisfy the user goal.
    - Prefer local style and existing macros/packages over new conventions.
    - Keep prose edits academic but not verbose; avoid rewriting whole sections when a sentence-level fix is enough.
    - For bibliography changes, merge duplicates carefully and preserve keys when possible to avoid unnecessary citation churn.
 
-5. Verify.
+6. Verify.
    - Run the project's normal build command if available.
    - Check logs for undefined references/citations, duplicate labels, rerun warnings, and BibTeX warnings.
    - Inspect PDF text or rendered pages for visible issues such as wrong TOC pages, broken cover title lines, repeated reference names, algorithm line-number references, malformed equation ranges, and bibliography formatting.

@@ -7,6 +7,7 @@
 ## Features
 
 - Review examiner comments and produce a traceable minimal revision plan.
+- Use `revision-check` as the approval skill so nontrivial edits are applied only after user approval.
 - Draft Chinese official materials for examiner-comment revision explanations and advisor opinions.
 - Run thesis-wide grammar and academic prose checks while avoiding LaTeX, math, and citation noise.
 - Generate a project-level style sheet for terminology, notation, headings, citations, and bilingual wording.
@@ -23,9 +24,10 @@ In most cases, ask your agent:
 
 ```text
 Install the skill from https://github.com/nht2018/thesis-revise.git as thesis-revision.
+Install the skill from https://github.com/nht2018/revision-check.git as revision-check.
 ```
 
-Mainstream coding agents that support custom skills, rules, or project instructions will typically fetch and enable the skill through their own mechanism, such as Codex, Claude Code, and Cursor CLI.
+Mainstream coding agents that support custom skills, rules, or project instructions will typically fetch and enable these skills through their own mechanism, such as Codex, Claude Code, and Cursor CLI.
 
 ## Usage
 
