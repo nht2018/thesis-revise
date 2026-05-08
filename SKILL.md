@@ -31,6 +31,7 @@ Use `revision-check` as the approval skill when edits need user approval. `thesi
 3. Review before editing.
    - For examiner comments, produce a tracking table with: comment, location, proposed minimal fix, risk level, and verification method.
    - When requested, draft a Chinese "revision or non-revision explanation for examiner comments" and a separate "advisor opinion" draft for official thesis materials. Mark advisor text as a draft that must be confirmed and signed by the advisor.
+   - For official examiner-response materials, base each item's wording on approval status: approved and applied items become "修改说明"; unapproved, ignored, cancelled, or not-yet-approved items become "不修改说明" or "暂未修改说明". Never describe an examiner comment as revised unless the corresponding edit was approved and verified.
    - For thesis-wide grammar checks, inspect prose by chapter or section after filtering out LaTeX commands, formulas, citations, and bibliography noise.
    - Classify findings as "must fix", "should fix", or "leave/confirm".
    - Give concrete file/line references and distinguish real PDF issues from text-extraction artifacts.
@@ -39,6 +40,7 @@ Use `revision-check` as the approval skill when edits need user approval. `thesi
    - For any nontrivial source edits after a review plan, use the installed `$revision-check` workflow unless the user explicitly asks for direct edits without an approval page.
    - Convert thesis findings into `revision-check` review items with concrete locations, occurrence counts, issue types, current/proposed text, reasons, and priorities.
    - Let `revision-check` open the local `Revision Review` approval page and apply only the approved items.
+   - Preserve the mapping between examiner comments and `revision-check` item IDs so that official response materials can distinguish approved modifications from unapproved or ignored proposals.
    - Do not duplicate or bypass `revision-check` approval logic inside this skill.
 
 5. Implement only after approval.
@@ -51,6 +53,7 @@ Use `revision-check` as the approval skill when edits need user approval. `thesi
    - Run the project's normal build command if available.
    - Check logs for undefined references/citations, duplicate labels, rerun warnings, and BibTeX warnings.
    - Inspect PDF text or rendered pages for visible issues such as wrong TOC pages, broken cover title lines, repeated reference names, algorithm line-number references, malformed equation ranges, and bibliography formatting.
+   - Before drafting official examiner-response materials, reconcile the final approval JSON, applied edits, ignored items, and validation results into a per-comment status table.
    - Report changed files, verification results, unresolved risks, and any issues intentionally left unchanged.
 
 ## References

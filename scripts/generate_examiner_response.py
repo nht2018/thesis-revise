@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -35,6 +36,57 @@ def split_comments(text: str) -> list[str]:
         if block:
             items.append(" ".join(block.split()))
     return items or ["待填写专家意见。"]
+
+
+def load_approval(path: str | None) -> dict:
+    if not path:
+        return {}
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def load_comment_status(path: str | None) -> dict[int, dict]:
+    if not path:
+        return {}
+    raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if isinstance(raw, list):
+        result = {}
+        for item in raw:
+            if isinstance(item, dict) and "comment_index" in item:
+                result[int(item["comment_index"])] = item
+        return result
+    if isinstance(raw, dict):
+        return {int(key): value for key, value in raw.items()}
+    return {}
+
+
+def approval_summary(approval: dict, item: dict | None = None) -> tuple[str, str, str]:
+    if item:
+        status = item.get("status", "").strip()
+        explanation = item.get("explanation", "").strip()
+        location = item.get("location", "").strip()
+        approved = item.get("approved_ids") or item.get("approved_items") or []
+        ignored = item.get("ignored_ids") or item.get("ignored_items") or []
+        unapproved = item.get("unapproved_ids") or item.get("unapproved_items") or []
+        cancelled = item.get("cancelled", False)
+        if status and explanation:
+            return (status, explanation, location or "待填写。")
+        if cancelled:
+            return ("审批取消", "相关修改审批流程已取消，故本次暂未形成最终修改。", location or "不适用。")
+        if approved and (ignored or unapproved):
+            return ("部分修改", "部分修改建议已获批准并应填写已完成的修改内容；未获批准或已忽略的部分应说明暂未修改原因。", location or "待填写。")
+        if approved:
+            return ("已修改", "已采纳。相关修改建议已获批准；请根据实际应用结果填写具体修改内容。", location or "待填写。")
+        if ignored:
+            return ("未修改", "经确认，该项本次不作为修改内容处理；请根据实际情况填写不修改原因。", location or "不适用。")
+        if unapproved:
+            return ("未批准", "该修改建议已提交审批，但本次未获批准，因此论文暂未据此修改。", location or "不适用。")
+        return ("待填写", "待根据论文实际修改情况填写。", location or "待填写。")
+
+    if not approval:
+        return ("待填写", "待根据论文实际修改情况填写。", "待填写。")
+    if approval.get("cancelled"):
+        return ("审批取消", "相关修改审批流程已取消，故本次暂未形成最终修改。", "不适用。")
+    return ("待核对审批结果", "已读取审批结果，但尚未建立该专家意见与具体审批项的对应关系；请补充逐条对应关系后填写修改或不修改说明。", "待填写。")
 
 
 def advisor_text(stance: str) -> str:
@@ -70,7 +122,14 @@ def advisor_text(stance: str) -> str:
 """
 
 
-def build_document(comments: list[str], stance: str, title: str | None, student: str | None) -> str:
+def build_document(
+    comments: list[str],
+    stance: str,
+    title: str | None,
+    student: str | None,
+    approval: dict | None = None,
+    comment_status: dict[int, dict] | None = None,
+) -> str:
     lines: list[str] = []
     lines.append("# 针对专家意见的修改（或不修改）说明")
     lines.append("")
@@ -82,11 +141,12 @@ def build_document(comments: list[str], stance: str, title: str | None, student:
         lines.append("")
     lines.append("本人已认真阅读专家对学位论文提出的评阅意见，并在导师指导下对论文进行了逐条核对和修改。现将针对专家意见的修改（或不修改）情况说明如下。")
     lines.append("")
-    lines.append("| 序号 | 专家意见 | 修改（或不修改）说明 | 修改位置 |")
-    lines.append("| --- | --- | --- | --- |")
+    lines.append("| 序号 | 专家意见 | 处理状态 | 修改（或不修改）说明 | 修改位置 |")
+    lines.append("| --- | --- | --- | --- | --- |")
     for idx, comment in enumerate(comments, 1):
+        status, explanation, location = approval_summary(approval or {}, (comment_status or {}).get(idx))
         safe_comment = comment.replace("|", "\\|")
-        lines.append(f"| {idx} | {safe_comment} | 待根据论文实际修改情况填写。 | 待填写。 |")
+        lines.append(f"| {idx} | {safe_comment} | {status} | {explanation} | {location} |")
     lines.append("")
     lines.append("以上说明均基于论文当前修改稿。本人确认已对专家意见进行了认真核对，并已根据论文实际情况作出相应修改或说明。")
     lines.append("")
@@ -107,6 +167,8 @@ def main() -> int:
     parser.add_argument("--out", help="Output Markdown path; defaults to stdout")
     parser.add_argument("--title", help="Optional thesis title")
     parser.add_argument("--student", help="Optional student name")
+    parser.add_argument("--approval-json", help="Optional revision-check approval JSON used to set default response status")
+    parser.add_argument("--comment-status-json", help="Optional per-comment status mapping JSON; required for approval-aware final wording")
     parser.add_argument(
         "--advisor-stance",
         choices=["agree", "conditional", "not-agree"],
@@ -116,7 +178,9 @@ def main() -> int:
     args = parser.parse_args()
 
     comments = split_comments(read_comments(args.comments))
-    doc = build_document(comments, args.advisor_stance, args.title, args.student)
+    approval = load_approval(args.approval_json)
+    comment_status = load_comment_status(args.comment_status_json)
+    doc = build_document(comments, args.advisor_stance, args.title, args.student, approval, comment_status)
     if args.out:
         Path(args.out).write_text(doc, encoding="utf-8")
     else:

@@ -5,11 +5,53 @@ Use this guide when the user needs Chinese materials for graduate-school adminis
 ## Required Inputs
 
 - Examiner comments, preferably separated by expert and item number.
-- Final modification status for each comment: revised, not revised, partially revised, or already addressed.
+- Final modification status for each comment: revised, not revised, partially revised, already addressed, not approved, ignored, or cancelled.
+- The `revision-check` approval result when approval was used: approved IDs/items, ignored IDs/items, and cancellation status.
+- A per-comment mapping from each examiner comment to its relevant `revision-check` item IDs and final status.
 - Verified locations: chapter, section, page, equation/table/figure/algorithm number, or source file line.
 - Advisor stance: agree with the revision/non-revision explanation and agree to defense; conditionally agree; or do not agree.
 
 Do not invent completed modifications. If evidence is missing, write "待补充" or ask the user to confirm.
+
+## Approval Mapping Rule
+
+When `revision-check` is used, official wording must follow the approval result:
+
+- `approved_ids` or `approved_items`, after the edits are applied and verified: write a 修改说明, using wording such as `已采纳。论文已在……处修改/补充……。`
+- `ignored_ids` or `ignored_items`: write a 不修改说明, using wording such as `经确认，本次暂未按该意见修改，主要原因是……。`
+- Items shown in the approval page but not approved: write a 暂未修改说明 or 待确认说明; do not claim they were revised.
+- `cancelled: true`: do not draft final "已修改" material. Use a temporary note such as `审批流程已取消，相关修改尚未确认。`
+- Items that were already present in the thesis before the approval run may be marked `已在原文体现`, but only after source/PDF verification.
+
+Maintain the mapping from each examiner comment to one or more `revision-check` item IDs. If a comment has both approved and unapproved edits, mark it as `部分修改` and explain both parts. Do not use a global approval JSON alone to mark all comments as revised; approval status must be reconciled per comment.
+
+Optional per-comment status JSON for the helper script:
+
+```json
+{
+  "1": {
+    "approved_ids": ["G1", "L2"],
+    "status": "已修改",
+    "explanation": "已采纳。论文已在第 X 章第 X 节补充……。",
+    "location": "第 X 章第 X 节，第 X 页"
+  },
+  "2": {
+    "ignored_ids": ["G3"],
+    "status": "未修改",
+    "explanation": "经确认，该项本次不作为修改内容处理，主要原因是……。",
+    "location": "不适用"
+  }
+}
+```
+
+Use it with:
+
+```bash
+python3 ~/.codex/skills/thesis-revision/scripts/generate_examiner_response.py comments.txt \
+  --approval-json /tmp/revision-check-approval.json \
+  --comment-status-json comment-status.json \
+  --out revision-response.md
+```
 
 ## Tracking Table
 
@@ -17,7 +59,7 @@ Maintain an internal table before drafting official text:
 
 | 序号 | 专家意见 | 处理状态 | 修改位置 | 修改或不修改说明 | 验证方式 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | ... | 已修改/未修改/部分修改/已在原文体现 | 第 X 章第 X 节，第 X 页 | ... | 编译/PDF/源码复查 |
+| 1 | ... | 已修改/未修改/部分修改/已在原文体现/未批准/已忽略/审批取消 | 第 X 章第 X 节，第 X 页 | ... | approval JSON/编译/PDF/源码复查 |
 
 ## Official Document 1: 针对专家意见的修改（或不修改）说明
 
@@ -45,6 +87,9 @@ Recommended wording:
 - Revised: `已采纳。论文已在第 X 章第 X 节（第 X 页）补充/修改……，进一步明确……。`
 - Partially revised: `部分采纳。论文已在……处补充……；对于……部分，考虑到……，暂未进一步展开。`
 - Not revised: `经认真核对，暂未按该意见修改，主要原因是……。该处理不影响论文的主要结论，并已与导师沟通确认。`
+- Not approved: `该修改建议已提交审批，但本次未获批准，因此论文暂未据此修改。后续如需处理，可在进一步确认后补充修改。`
+- Ignored: `经确认，该项本次不作为修改内容处理，主要原因是……。`
+- Cancelled: `相关修改审批流程已取消，故本次暂未形成最终修改。`
 - Already addressed: `经核对，原论文已在……处对该问题作出说明。为避免重复，本次未作实质性修改，仅对相关表述进行了……。`
 
 ## Official Document 2: 导师意见
